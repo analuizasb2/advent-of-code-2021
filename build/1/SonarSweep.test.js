@@ -7,10 +7,8 @@ describe("Sonar Sweep", function () {
         var increases = SonarSweep.calculateIncreases(testArrayMeasurements);
         expect(increases).toBe(7);
     });
-    // test("Should convert to sliding window array and return 5 increases", () => {
-    //   const increases = SonarSweep.calculateIncreasesWithSlidingWindow(
-    //     testArrayMeasurements
-    //   );
-    //   expect(increases).toBe(5);
-    // });
+    test("Should convert to sliding window array and return 5 increases", function () {
+        var increases = SonarSweep.calculateIncreasesWithSlidingWindow(testArrayMeasurements);
+        expect(increases).toBe(5);
+    });
 });
