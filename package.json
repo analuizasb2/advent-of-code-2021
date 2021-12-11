@@ -1,0 +1,28 @@
+{
+  "name": "advent",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "jest --coverage",
+    "clean": "rm -rf ./build",
+    "create-input": "mkdir ./build/inputs",
+    "copy-inputs": "cp -r ./src/inputs/ ./build/inputs/",
+    "start": "npm run clean && tsc && npm run copy-inputs && node build/index.js "
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.12",
+    "jest": "^27.4.4",
+    "ts-jest": "^27.1.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}
