@@ -1,2 +1,2 @@
-# Advent Of Code
-Solutions to Puzzles from [Advent Of Code](https://adventofcode.com), with Typescript and Jest.
+# Advent Of Code 2021
+Solutions to Puzzles from [Advent Of Code 2021](https://adventofcode.com/2021), with Typescript and Jest.
