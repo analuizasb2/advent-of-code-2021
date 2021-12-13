@@ -7,4 +7,8 @@ export const printSolutionBinaryDiagnostic = () => {
     "Day 3: Binary Diagnostic, 1st:",
     BinaryDiagnostic.calculatePowerConsumptionDecimal(inputBinaryDiagnostic)
   );
+  console.log(
+    "Day 3: Binary Diagnostic, 2nd:",
+    BinaryDiagnostic.calculateLifeSupportRating(inputBinaryDiagnostic)
+  );
 };

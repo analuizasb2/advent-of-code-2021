@@ -1,3 +1,12 @@
+enum SearchCriteria {
+  "fewerCommonBitsAndPrefer0",
+  "moreCommonBitsAndPrefer1",
+}
+
+export enum ReportType {
+  "OxygenGeneratorRating",
+  "CO2ScrubberRating",
+}
 export class BinaryDiagnostic {
   public static countZerosPerPosition = (
     diagnosticReportRows: string[]
@@ -40,5 +49,60 @@ export class BinaryDiagnostic {
       .split("")
       .map((bit) => (bit === "0" ? "1" : "0"))
       .join("");
+  };
+
+  public static calculateRatingDecimal = (
+    inputReport: string[],
+    typeOfReport: ReportType
+  ): number => {
+    let remainingReportArray: string[] = inputReport;
+    const zeroCountPerPosition = this.countZerosPerPosition(inputReport);
+    zeroCountPerPosition.every((positionZeroCount, position) => {
+      const criteria = this.getMatchCriteria(
+        typeOfReport === ReportType.OxygenGeneratorRating
+          ? SearchCriteria.moreCommonBitsAndPrefer1
+          : SearchCriteria.fewerCommonBitsAndPrefer0,
+        remainingReportArray,
+        position
+      );
+      remainingReportArray = remainingReportArray.filter(
+        (number) => number.split("")[position] === criteria
+      );
+      if (remainingReportArray.length === 1) return false;
+      return true;
+    });
+    return parseInt(remainingReportArray[0], 2);
+  };
+
+  public static calculateLifeSupportRating = (
+    inputReport: string[]
+  ): number => {
+    const CO2Rating = BinaryDiagnostic.calculateRatingDecimal(
+      inputReport,
+      ReportType.CO2ScrubberRating
+    );
+    const oxygenRating = BinaryDiagnostic.calculateRatingDecimal(
+      inputReport,
+      ReportType.OxygenGeneratorRating
+    );
+    return CO2Rating * oxygenRating;
+  };
+
+  private static getMatchCriteria = (
+    criteria: SearchCriteria,
+    remainingArray: string[],
+    position: number
+  ): string => {
+    const positionZeroCount =
+      this.countZerosPerPosition(remainingArray)[position];
+
+    switch (criteria) {
+      case SearchCriteria.fewerCommonBitsAndPrefer0: {
+        return positionZeroCount <= remainingArray.length / 2 ? "0" : "1";
+      }
+      case SearchCriteria.moreCommonBitsAndPrefer1: {
+        return positionZeroCount > remainingArray.length / 2 ? "0" : "1";
+      }
+    }
   };
 }

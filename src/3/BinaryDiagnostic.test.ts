@@ -1,5 +1,4 @@
-import exp from "constants";
-import { BinaryDiagnostic } from "./BinaryDiagnostic";
+import { BinaryDiagnostic, ReportType } from "./BinaryDiagnostic";
 
 describe("Binary Diagnostic", () => {
   const testInput = [
@@ -37,5 +36,26 @@ describe("Binary Diagnostic", () => {
       BinaryDiagnostic.calculatePowerConsumptionDecimal(testInput);
 
     expect(gammaRateDecimal).toBe(198);
+  });
+
+  test("Should calculate oxygen generator rating", () => {
+    const oxygenRating = BinaryDiagnostic.calculateRatingDecimal(
+      testInput,
+      ReportType.OxygenGeneratorRating
+    );
+    expect(oxygenRating).toBe(23);
+  });
+  test("Should calculate CO2 Scrubber rating", () => {
+    const CO2Rating = BinaryDiagnostic.calculateRatingDecimal(
+      testInput,
+      ReportType.CO2ScrubberRating
+    );
+    expect(CO2Rating).toBe(10);
+  });
+
+  test("Should calculate life support rating", () => {
+    const lifeSupportRating =
+      BinaryDiagnostic.calculateLifeSupportRating(testInput);
+    expect(lifeSupportRating).toBe(230);
   });
 });
