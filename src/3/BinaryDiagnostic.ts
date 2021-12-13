@@ -68,8 +68,7 @@ export class BinaryDiagnostic {
       remainingReportArray = remainingReportArray.filter(
         (number) => number.split("")[position] === criteria
       );
-      if (remainingReportArray.length === 1) return false;
-      return true;
+      return remainingReportArray.length !== 1;
     });
     return parseInt(remainingReportArray[0], 2);
   };
